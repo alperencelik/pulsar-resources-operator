@@ -205,6 +205,13 @@ type PulsarAdminConfig struct {
 
 	// Set the path to the trusted TLS certificate file
 	TLSTrustCertsFilePath string
+
+	// Set the path to the client certificate file
+	TLSCertFilePath string
+
+	// Set the path to the client private key file
+	TLSKeyFilePath string
+
 	// Configure whether the Pulsar client accept untrusted TLS certificate from broker (default: false)
 	TLSAllowInsecureConnection bool
 
@@ -232,8 +239,12 @@ func NewPulsarAdmin(conf PulsarAdminConfig) (PulsarAdmin, error) {
 	var adminClient admin.Client
 
 	config := &config.Config{
-		WebServiceURL:              conf.WebServiceURL,
-		TLSAllowInsecureConnection: true,
+		WebServiceURL:                 conf.WebServiceURL,
+		TLSTrustCertsFilePath:         conf.TLSTrustCertsFilePath,
+		TLSCertFile:                   conf.TLSCertFilePath,
+		TLSKeyFile:                    conf.TLSKeyFilePath,
+		TLSEnableHostnameVerification: conf.TLSEnableHostnameVerification,
+		TLSAllowInsecureConnection:    conf.TLSAllowInsecureConnection,
 		// V2 admin endpoint contains operations for tenant, namespace and topic.
 		PulsarAPIVersion: config.V2,
 	}

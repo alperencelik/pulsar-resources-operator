@@ -42,6 +42,18 @@ type PulsarConnectionSpec struct {
 	// +kubebuilder:validation:Pattern="^https?://.+$"
 	AdminServiceURL string `json:"adminServiceURL"`
 
+	TLSTrustCertsFilePath string `json:"tlsTrustCertsFilePath,omitempty"`
+
+	TLSCertFilePath string `json:"tlsCertFilePath,omitempty"`
+
+	TLSKeyFilePath string `json:"tlsKeyFilePath,omitempty"`
+
+	// +kubebuilder:default=true
+	AllowInsecureConnection bool `json:"allowInsecureConnection,omitempty"`
+
+	// +kubebuilder:default=false
+	HostnameVerificationEnable bool `json:"hostnameVerificationEnable,omitempty"`
+
 	// Authentication defines the authentication configuration for connecting to the Pulsar cluster.
 	// It supports both token-based and OAuth2-based authentication methods.
 	// +optional
