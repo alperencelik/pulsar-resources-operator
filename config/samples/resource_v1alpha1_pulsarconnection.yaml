@@ -18,9 +18,7 @@ metadata:
   name: pulsarconnection-sample
   namespace: pulsar
 spec:
-  adminServiceURL: http://c-sn-platform-broker.pulsar.svc.cluster.local:8080
-  authentication:
-    token:
-      secretRef:
-        name: c-sn-platform-vault-secret-env-injection
-        key: brokerClientAuthenticationParameters
+  adminServiceURL: https://instance.company.com:8443
+  tlsTrustCertsFilePath: /path/to/admin-ca.crt 
+  tlsCertFilePath: /path/to/admin-tls.crt 
+  tlsKeyFilePath: /path/to/admin-tls.key 
