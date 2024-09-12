@@ -29,11 +29,32 @@ image:
   # resource controller container
   manager:
     # -- Specififies the registry of images, especially when user want to use a different image hub
-    registry: docker.io
+    registry: registry.greenwavereality.com
     # -- The full repo name for image.
-    repository: streamnative/pulsar-resources-operator
+    repository: axon-vedge/pulsar-resources-operator
     # -- Image tag, it can override the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: "v0.0.1"
+
+volumes: 
+  - name: admin
+    secret:
+      items:
+      - key: tls.crt
+        path: tls.crt
+      - key: tls.key
+        path: tls.key
+      secretName: pulsar2101-vedge-dev-client-admin
+  - name: ca
+    secret:
+      items:
+      - key: ca.crt
+        path: ca.crt
+      secretName: pulsar2101-vedge-dev-ca-tls
+volumeMounts: 
+  - mountPath: /pulsar/certs/ca
+    name: ca
+  - mountPath: /pulsar/certs/admin
+    name: admin
 
 # -- Specifies image pull secrets for private registry, the format is `- name: gcr`
 imagePullSecrets: []

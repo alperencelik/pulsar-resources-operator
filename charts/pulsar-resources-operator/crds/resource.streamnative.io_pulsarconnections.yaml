@@ -113,6 +113,9 @@ spec:
                   This URL is used for administrative operations.
                 pattern: ^https?://.+$
                 type: string
+              allowInsecureConnection:
+                default: true
+                type: boolean
               authentication:
                 description: |-
                   Authentication defines the authentication configuration for connecting to the Pulsar cluster.
@@ -213,6 +216,63 @@ spec:
                   ClusterName specifies the name of the local Pulsar cluster.
                   When setting up Geo-Replication between Pulsar instances, this should be enabled to identify the cluster.
                 type: string
+              hostnameVerificationEnable:
+                default: false
+                type: boolean
+              tlsCertFilePath:
+                description: ValueOrSecretRef is a string or a secret reference of
+                  the authentication
+                properties:
+                  secretRef:
+                    description: SecretKeyRef indicates a secret name and key
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  value:
+                    type: string
+                type: object
+              tlsKeyFilePath:
+                description: ValueOrSecretRef is a string or a secret reference of
+                  the authentication
+                properties:
+                  secretRef:
+                    description: SecretKeyRef indicates a secret name and key
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  value:
+                    type: string
+                type: object
+              tlsTrustCertsFilePath:
+                description: ValueOrSecretRef is a string or a secret reference of
+                  the authentication
+                properties:
+                  secretRef:
+                    description: SecretKeyRef indicates a secret name and key
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  value:
+                    type: string
+                type: object
             type: object
           status:
             description: |-
@@ -232,7 +292,7 @@ spec:
                     observations of a foo's current state.\n\t    // Known .status.conditions.type
                     are: \"Available\", \"Progressing\", and \"Degraded\"\n\t    //
                     +patchMergeKey=type\n\t    // +patchStrategy=merge\n\t    // +listType=map\n\t
-                    \   // +listMapKey=type\n\t    Conditions []metav1.Condition `json:\"conditions,omitempty\"
+                    \   // +listMapKey=type\n\t    Conditions ]metav1.Condition `json:\"conditions,omitempty\"
                     patchStrategy:\"merge\" patchMergeKey:\"type\" protobuf:\"bytes,1,rep,name=conditions\"`\n\n\n\t
                     \   // other fields\n\t}"
                   properties:
